@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Blue Sky</title>
+        <!-- Add Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+        <!-- Add Google Fonts for custom typography -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    </head>
+    <style>
+        body {
+            text-align: center;
+            margin-bottom: 70px;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #e3f2fd;
+            color: black;
+        }
+        footer {
+            position:static;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #e3f2fd; /* Adjust background color as needed */
+            color: black; /* Adjust text color as needed */
+            text-align: center;
+            padding: 10px 0; /* Adjust the padding as needed for the desired margin */
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Style the navigation bar */
+        
+
+        .hero .btn-primary {
+            background-color: #ff5733;
+            /* Custom button color */
+            border-color: #ff5733;
+        }
+
+        /* custom.css */
+        .card {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .card-img-container {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: auto;
+        }
+
+        .card-title {
+            margin-top: 10px;
+            font-size: 1.25rem;
+        }
+    </style>
+
+    <body>
+        <nav class="navbar navbar-light navbar-expand-lg" style="background-color: #e3f2fd;">
+            <a class="navbar-brand" href="/">Blue Sky</a>
+        
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'myapp:about' %}">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blog:post_list' %}">Our Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'myapp:contact' %}">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'myapp:addnewproperty' %}">Add Property</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'myapp:filter' %}">Apply Filter</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left: 570px;">
+                            My Account
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'social:dashboard' %}">Dashboard</a>
+                            <a class="dropdown-item" href="{% url 'myapp:addnewagent' %}">Join as an agent</a>
+                            <a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a>
+                            <a class="dropdown-item" href="{% url 'myapp:Delete_account' %}">Delete user</a>
+                            <a class="dropdown-item" href="{% url 'accounts:logedout' %}">Logout</a>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:logedin' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:Register' %}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container mt-4">{% block content %} {% endblock %}</div>
+
+        <!-- Footer -->
+        <footer class="mt-4 fixed-bottom">
+            <div class="container text-center">
+                <p>&copy; {{ year }}Blue Sky. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+</html>

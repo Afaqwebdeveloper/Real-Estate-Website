@@ -1,0 +1,28 @@
+<!-- property_list.html -->
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+<div class="container">
+  <h1 class="my-4">Listed Properties</h1>
+
+  <div class="row mt-4">
+    {% for property in properties %}
+      <div class="col-md-4"> <!-- Create three equally spaced columns for each ad -->
+        <div class="card">
+          <a href="{% url 'myapp:property_detail' property.id %}">
+            <img class="card-img-top" src="{{ property.image.url }}" alt="{{ property.title }}" style="width: 300px; height: 300px;">
+          </a>
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="{% url 'myapp:property_detail' property.id %}" style="color: #007bff; text-decoration: none;">
+                {{ property.title }}
+              </a>
+            </h5>
+            <p class="card-text" style="color: #333;"><strong>Price:</strong> {{ property.price }} Rs</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
